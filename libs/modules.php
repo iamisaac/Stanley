@@ -12,7 +12,8 @@ class layout
 		
 		'<html>
 		<head>
-		<title>'.$title.'</title>
+		<title>'.$this->title.'</title>
+		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		</head>
 		<body>
 		<div id="main">';

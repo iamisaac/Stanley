@@ -1,7 +1,15 @@
 <?php
 session_start();
 
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', 'on');
+
+/*
+
+
+*/
 require_once('libs/modules.php');
+require_once('libs/config.php');
 
 
 global $layout;
@@ -43,7 +51,7 @@ if(isset($_SESSION['login']))
 	/*
 	login page
 	*/
-	$layout->title = '';
+	$layout->title = 'Please first login!';
 	$layout->up();
 	
 	require 'layouts/enter.php';
@@ -56,4 +64,3 @@ if(isset($_SESSION['login']))
 
 
 ?>
-under construction
