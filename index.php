@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 
 error_reporting(E_ALL|E_STRICT);
@@ -8,13 +8,27 @@ ini_set('display_errors', 'on');
 
 
 */
+require_once('libs/database.php');
 require_once('libs/modules.php');
-require_once('libs/config.php');
 
+/*
+
+*/
+
+if(isset($_GET['w'])) $what = $_GET['w'];
+
+/*
+
+
+*/
 
 global $layout;
+global $db;
 
-$layout = new layout();
+$db         = connect();
+$layout     = new layout();
+$layout->db = $db;
+
 
 
 
@@ -26,23 +40,35 @@ if(isset($_SESSION['login']))
 	
 	$layout->up();
 	
-	switch($what)
+	
+	if($what)
 	{
-		case '':
+		
+		$layout->up();
+		
+		switch($what)
 		{
-			
-			
-			
-			
-			break;
+			case 'start':
+			{
+				require('layouts/start.php');								
+				break;
+			}
+			case 'profile':
+			{
+				require('layouts/profile.php');
+			}
+			default:
+			{
+				break;
+			}
 		}
-		default:
-		{
-			break;
-		}
+
+		$layout->down();
+	
+	}else	
+	{
+		
 	}
-	
-	
 	
 	
 
@@ -51,10 +77,10 @@ if(isset($_SESSION['login']))
 	/*
 	login page
 	*/
-	$layout->title = 'Please first login!';
+	$layout->title = 'Enter!';
 	$layout->up();
 	
-	require 'layouts/enter.php';
+	require('layouts/enter.php');
 	
 	$layout->down();
 }	

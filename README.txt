@@ -1,1 +1,3 @@
-Insert some clever text here.\n
+Hi all,
+
+would you like to help?

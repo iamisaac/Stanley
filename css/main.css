@@ -39,9 +39,8 @@ html, body
     -moz-border-radius-bottomright: 8px; 
     -webkit-border-bottom-left-radius: 8px; 
     -webkit-border-bottom-right-radius: 8px;
+    text-align: center; 
     
-     
-
 
 }
 
@@ -49,7 +48,7 @@ html, body
 {
 	position: relative;
 	top: 500px;
-	left: 170px;
+
 }
 
 .log
@@ -63,4 +62,30 @@ html, body
     color: #fff;
     font-size: 25px;
     
+}
+
+/*
+same animations
+*/
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg); }
+
+  to {
+    -webkit-transform: rotate(360deg); } }
+
+@-moz-keyframes rotate {
+  from {
+    -moz-transform: rotate(0deg); }
+
+  to {
+    -moz-transform: rotate(360deg); } }
+
+.buttonAnim {
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 5s;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: rotate;
+  -moz-animation-duration: 5s;
+  -moz-animation-iteration-count: infinite;
 }
