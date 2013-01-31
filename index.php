@@ -40,20 +40,20 @@ if(class_exists('Facebook'))
 		
 		if ($user) 
 		{
-		  try
-		  {
+		  	try
+		  	{
 		  
-		    $user_profile = $fb->api('/me');
+		    	$user_profile = $fb->api('/me');
 		  
-		  } catch (FacebookApiException $e) 
-		  {
+		  	} catch (FacebookApiException $e) 
+		  	{
 		  
-		  }
+		  	}
 		}
 
 }
 /*
-
+GET area -> everything what is needed is better to take right now
 */
 
 if(isset($_GET['w'])) $what = $_GET['w']; else $what = 'start';

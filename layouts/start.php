@@ -26,6 +26,7 @@ $layout->baner();
 				echo '<a href="" class="big">'.ucfirst($tmp['name']).'</a>';
 			}
 			
+			unset($resp, $tmp);
 		?>
 		</div>
 		<div class="sp2">		

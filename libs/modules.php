@@ -18,12 +18,15 @@ class layout
 		<html>
 		<head>
 		<title>'.$title.'</title>
+		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/tipped/tipped.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/lighview/lighview.css" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="js/jq183.js"></script>
+		<script type="text/javascript" src="js/jq190.js"></script>
 		</head>
 		<body>
 		<div id="main">';
@@ -81,7 +84,7 @@ class layout
 			<table>
 				<tr>
 					<td><a href="?w=profile"><img src="'.$this->pic.'" width="35" height="35" border="0" /></a></td>
-					<td style="width: 270px;"><span class="upName">'.$this->name.'</span></td>
+					<td style="width: 263px;"><span class="upName">'.$this->name.'</span></td>
 					<td style="width: 600px;">
 						<input id="search" name="search" class="search"></input>
 					</td>				

@@ -57,17 +57,17 @@ class posts
 		{
 			$sql   = "SELECT * FROM users WHERE id='$id'";
 			$key    = md5('stanley'.$sql);
-			$data  = $this->mem->get($key);
+			$data3  = $this->mem->get($key);
 			
-			if(!$data)
+			if(!$data3)
 			{
 				
 				$half = $this->db->query($sql)->fetch_assoc();	
 				$this->mem->set($key, $half, MEMCACHE_COMPRESSED, 864000);
-				$data = $this->mem->get($key); 
+				$data3 = $this->mem->get($key); 
 			}
 			
-			return $half;
+			return $data3;
 			
 		}
 		
@@ -81,52 +81,52 @@ class posts
 			
 			if(isset($this->mem))
 			{				
-				$sql     =  "SELECT * FROM comments WHERE pid='$pid' ORDER BY date DESC";
+				$sql     =  "SELECT * FROM comments WHERE pid='$pid' ORDER BY date";
 				$key     =  md5('stanley'.$sql);
-				$data    =  $this->mem->get($key);
+				$data2    =  $this->mem->get($key);
 				
-				if(!$data)
+				if(!$data2)
 				{
 					$tmp_arr = array();
-					$i		 = 0;
+					$ii		 = 0;
 					$half	 = $this->db->query($sql);
 					
 					while($tmp = $half->fetch_assoc())
 					{
-						$tmp_arr[$i] = $tmp;
-						$i++;
+						$tmp_arr[$ii] = $tmp;
+						$ii++;
 					}
 					
 					$this->mem->set($key, $tmp_arr, MEMCACHE_COMPRESSED, 864000);
-					$data = $this->mem->get($key); unset($tmp_arr);
+					$data2 = $this->mem->get($key); unset($tmp_arr);
 				}
 				
 				
 				
-				if(count($data)>0)
+				if(count($data2)>0)
 				{
 					
-					$i = 0;					
+					$ii = 0;					
 					
-					while(@$data[$i])
+					while(@$data2[$ii])
 					{
 						
-						$userFetch = $this->fetchUsers($data[$i]['uid']);
+						$userFetch = $this->fetchUsers($data2[$ii]['uid']);
 						
-						if(strlen(@$userFetch['img'])>0)	$pic = $user['img']; else $pic = 'gfx/faces/23.png';
-						if(strlen(@$userFetch['fname'])>0 && strlen($user['sname'])>0) $name = $user['fname'].' '.$user['sname']; else $name = $user['zhname'];
+						if(strlen(@$userFetch['img'])>0)	$pic = $userFetch['img']; else $pic = 'gfx/faces/23.png';
+						if(strlen(@$userFetch['fname'])>0 && strlen($userFetch['sname'])>0) $name = $userFetch['fname'].' '.$userFetch['sname']; else $name = $userFetch['zhname'];
 						
 						
-						echo '<div class="comment" id="comment'.$data[$i]['id'].'">
-							 <table celpadding="0" celspacing="0">
+						echo '<div class="comment" id="comment'.$data2[$ii]['id'].'">
+							 <table celpadding="0" cellspacing="0">
 							 	<tr>
 								<td><img src="'.$pic.'" width="25" height="25" class="tipped" title="'.$name.'" /></td>
-								<td>'.$data[$i]['body'].'</td>	
+								<td>'.$data2[$ii]['body'].'</td>	
 								</td>
 							 </table>									
-						</div>';
+							 </div>';
 						
-						$i++;
+						$ii++;
 					}
 				}
 			
@@ -177,15 +177,15 @@ class posts
 					{
 						
 						echo '<div class="post" id="post'.$data[$i]['id'].'">
-								<table>
+								<table celpadding="0" cellspacing="0">
 									<tr>
 										<td><img src="'.$this->pic.'"  width="30" height="30" /></td>
-										<td style="width:400px; text-align: left;">'.$this->name.'</td>
-										<td><a href="#" onclick="deleteComment('.$data[$i]['$id'].')"><img src="../gfx/x.gif" /></a></td>
+										<td style="width:550px; text-align: left;">'.$this->name.'</td>
+										<td><a href="#" onclick="deletePost('.$data[$i]['id'].')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>
 										<td></td>
-										<td colspan="2" class="postBody">'.$data[$i]['body'].'</td>
+										<td colspan="2" class="postBody">'.$data[$i]['body'].'<br /><br /></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -193,17 +193,24 @@ class posts
 										
 										$this->fetchComments($data[$i]['id']);
 										
-						echo			'<br /></td>
+						echo			'</td>
 									</tr>
 									<tr>
 										<td></td>
 										<td colspan="2">
-											<table celpadding="0" celspacing="0">
-											<tr>
-												<td><img src="'.$this->pic.'" width="25" height="25" /></td>
-												<td><input type="text" id="commentBody" name="commentBody" class="commentBody" onkeypress="return addcomment(event, '.$data[$i]['id'].')" /></td>
-											</tr>
-											</table>
+
+												<table celpadding="0" cellspacing="0">
+												<tr>
+													<td colspan="2">
+													<div id="newComment'.$data[$i]['id'].'"></id>
+													</td>
+												</tr>		
+												<tr>
+													<td><img src="'.$this->pic.'" width="25" height="25" /></td>
+													<td><input type="text" id="commentBody'.$data[$i]['id'].'" name="commentBody'.$data[$i]['id'].'" class="commentBody" onkeypress="return addcomment(event, '.$data[$i]['id'].')" /></td>
+												</tr>
+												</table>
+
 										</td>
 									</tr>		
 								</table>

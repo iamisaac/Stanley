@@ -9,14 +9,16 @@ $('#addPost').click(function(){
 			alert(res);
 			
 			var obj = jQuery.parseJSON(res);
-			var div = null;
 			
 			if(typeof obj == 'object')
 			{
 				
 				if(obj.stat == 'OK')
 				{
-					$('#postMain').append(div);
+					
+					$('#post').val('');
+					$('#postMain').append('<div id="love'+obj.pid+'"></div>');
+					$('#love'+obj.pid).css('display', 'none').append(obj.div).slideDown('fast');
 				}
 				
 					
@@ -32,7 +34,7 @@ function addcomment(e, num)
 	if(e.keyCode == 13)
 	{
 		
-		var body = $('#commentBody').val();
+		var body = $('#commentBody'+num).val();
 		
 		if(body.length > 2)
 		{		
@@ -40,21 +42,21 @@ function addcomment(e, num)
 				
 				url: './ajax/addcomment.php',
 				type: 'post',
-				data: {pid:num, body: body},
+				data: {pid: num, body: body},
 				success: function(res)
 				{
 					
+					var obj = jQuery.parseJSON(res);
 					
-					alert(res);
-					
-					var obj == jQuery.parseJSON(res);
-					var div == null;
 					
 					if(typeof obj == 'object')
 					{
 						if(obj.stat == 'OK')
 						{
-							
+																						
+							$('#commentBody'+num).val("");
+							$('#newComment'+num).append('<div id="smile'+obj.cid+'"></div>');
+							$('#smile'+obj.cid).css('display', 'none').append(obj.div).slideDown('slow');
 							
 							
 						}

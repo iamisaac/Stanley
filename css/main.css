@@ -128,8 +128,14 @@ POSTS
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px;
     box-shadow: 0px 0px 4px gray;
+	padding: 3px;
+}
+
+.postBody
+{
 	
 }
+
 .commentBody
 {
 	height: 20px;
@@ -146,6 +152,12 @@ POSTS
 	width: 520px;
 	
 }
+
+.comment
+{
+	
+}
+
 /*
 concrete classes
 */
@@ -171,7 +183,7 @@ a.big:hover{color: silver; text-decoration: none;}
 
 .search{
 	border: 1px rgba(135,135,135,0.84) solid;
-	width: 485px;
+	width: 490px;
 	height: 30px;
 	
 }
