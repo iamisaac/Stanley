@@ -26,7 +26,6 @@ if(strlen($body)>0 && strlen($body)<4096)
 	{
 		
 		$cid = $db->inserd_id;
-		
 		$errors['stat'] = 'OK';
 	}
 	

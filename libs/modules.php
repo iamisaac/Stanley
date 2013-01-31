@@ -80,7 +80,7 @@ class layout
 		<div class="menu">
 			<table>
 				<tr>
-					<td><a href="/profile"><img src="'.$this->pic.'" width="35" height="35" border="0" /></a></td>
+					<td><a href="?w=profile"><img src="'.$this->pic.'" width="35" height="35" border="0" /></a></td>
 					<td style="width: 270px;"><span class="upName">'.$this->name.'</span></td>
 					<td style="width: 600px;">
 						<input id="search" name="search" class="search"></input>

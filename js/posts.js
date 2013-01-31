@@ -14,8 +14,12 @@ $('#addPost').click(function(){
 			if(typeof obj == 'object')
 			{
 				
+				if(obj.stat == 'OK')
+				{
+					$('#postMain').append(div);
+				}
 				
-				$('#postMain').append(div);
+					
 			}
 			
 		}
@@ -36,7 +40,28 @@ function addcomment(e, num)
 				
 				url: './ajax/addcomment.php',
 				type: 'post',
-				data: {pid:num, body: }
+				data: {pid:num, body: body},
+				success: function(res)
+				{
+					
+					
+					alert(res);
+					
+					var obj == jQuery.parseJSON(res);
+					var div == null;
+					
+					if(typeof obj == 'object')
+					{
+						if(obj.stat == 'OK')
+						{
+							
+							
+							
+						}
+						
+					}
+					
+				}
 				
 			});
 		}
@@ -51,6 +76,8 @@ options = {
   linkType: "preview",
   success: function(files) {
                 
+	  alert(files);
+				
                 $.ajax({
 	             	url: './ajax/addfiles.php',
 	             	type: 'POST',

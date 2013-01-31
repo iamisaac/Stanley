@@ -140,6 +140,12 @@ POSTS
     -webkit-border-radius: 4px;
 }
 
+.commentPosted
+{
+	height: 20px;
+	width: 520px;
+	
+}
 /*
 concrete classes
 */
@@ -173,6 +179,7 @@ a.big:hover{color: silver; text-decoration: none;}
 /*
 same animations
 */
+
 @-webkit-keyframes rotate {
   from {
     -webkit-transform: rotate(0deg); }
