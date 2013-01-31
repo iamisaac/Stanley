@@ -72,6 +72,30 @@ function addcomment(e, num)
 
 }
 
+function deletePost(pid, cat)
+{
+	$.ajax({
+		url: './ajax/deletepost.php',
+		type: 'post',
+		data: {pid: pid, cat: cat},
+		success: function(res)
+		{
+			
+			var obj = jQuery.parseJSON(res);
+			
+			if(typeof obj == 'object')
+			{
+				if(obj.stat == 'OK')
+				{
+					
+					$('#post'+pid).fadeOut('slow');
+				}
+			}
+		}
+	});
+
+}
+
 Dropbox.choose(options);
 
 options = {

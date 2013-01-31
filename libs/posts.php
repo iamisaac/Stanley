@@ -26,8 +26,9 @@ class posts
 						<tr><td style="width: 400px;">	
 						<input type="dropbox-chooser" name="selected-file" id="db-chooser"/>
 						</td>
-						<td style="width: 300px; text-align: right;">
-						<select id="cat" name="cat" class="selection">';
+						<td style="width: 200px; text-align: right;">
+						<label>
+							<select id="cat" name="cat">';
 							
 							$tmp = $this->db->query("SELECT * FROM categories");
 							
@@ -39,8 +40,11 @@ class posts
 							}							
 							
 							
-			echo		'</select>
-						<a href="#" class="big" id="addPost">Add</a>
+			echo		'	</select>
+						</label>
+						</td>
+						<td style="width: 120px; text-align: right;">
+							<a href="#" class="big" id="addPost">Add</a>
 						</td>
 						</tr>
 						</table>
@@ -181,7 +185,7 @@ class posts
 									<tr>
 										<td><img src="'.$this->pic.'"  width="30" height="30" /></td>
 										<td style="width:550px; text-align: left;">'.$this->name.'</td>
-										<td><a href="#" onclick="deletePost('.$data[$i]['id'].')"><img src="gfx/x.gif" /></a></td>
+										<td><a href="#" onclick="deletePost('.$data[$i]['id'].','.$data[$i]['cat'].')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>
 										<td></td>
@@ -189,11 +193,11 @@ class posts
 									</tr>
 									<tr>
 										<td></td>
-										<td colspan="2">';
+										<td colspan="2"><div id="commentSpace">';
 										
 										$this->fetchComments($data[$i]['id']);
 										
-						echo			'</td>
+						echo			'</div></td>
 									</tr>
 									<tr>
 										<td></td>
