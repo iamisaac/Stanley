@@ -27,7 +27,7 @@ class posts
 						<input type="dropbox-chooser" name="selected-file" id="db-chooser"/>
 						</td>
 						<td>
-							<img src="gfx/camera.png" />
+							<a href="#" id="addPhotos"><img src="gfx/camera.png" /></a>
 						</td>
 						<td style="width: 250px; text-align: right;">
 						<label>
@@ -190,7 +190,10 @@ class posts
 								<table celpadding="0" cellspacing="0">
 									<tr>
 										<td><img src="'.$this->pic.'"  width="30" height="30" /></td>
-										<td style="width:550px; text-align: left;">'.$this->name.'</td>
+										<td style="width:550px; text-align: left;">'.$this->name.'
+										<br />
+										<span class="dateFormat">'.$data[$i]['date'].'</span>
+										</td>
 										<td><a href="#" onclick="deletePost('.$data[$i]['id'].','.$data[$i]['cat'].')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>

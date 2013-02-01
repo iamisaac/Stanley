@@ -125,6 +125,13 @@ html, body
 POSTS
 */
 
+.dateFormat
+{
+	font-size: 10px;
+	color: #ccc;
+	font-weight: bold;
+}
+
 .post
 {
 	width: 600px;
@@ -267,6 +274,24 @@ a.big:hover{color: silver; text-decoration: none;}
 	
 }
 
+#searchArea
+{
+	display: none;
+	width: 100%;
+	height: 100px;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
+	margin-right: 5px;
+	
+}
+
+#searchBody
+{
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+}
+
 /*
 same animations
 */
@@ -293,3 +318,24 @@ same animations
   -moz-animation-duration: 5s;
   -moz-animation-iteration-count: infinite;
 }
+
+/*
+
+*/
+
+#overlayBody{
+    display:none;
+    width: 600px;
+    z-index: 600000;
+    border:10px solid #666;
+    border:10px solid rgba(82, 82, 82, 0.698);
+    border-radius: 8px; //opera
+    -moz-border-radius:8px;
+    -webkit-border-radius:8px;
+}
+
+#overlayBody div{
+    padding:10px;
+    background: #ffffff;
+}
+

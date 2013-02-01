@@ -45,3 +45,22 @@ $('#logout').click(function()
 	});
 });
 
+/*
+
+	SEARCH javascript part
+
+*/
+
+$('#search').focus(function()
+{
+	
+	$('#searchArea').slideDown('fast');
+
+});
+
+$('#search').blur(function()
+{
+	
+	$('#searchArea').slideUp('fast');
+	
+});

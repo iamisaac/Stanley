@@ -1,3 +1,9 @@
+$('#addPhotos').click(function(){
+	
+	$('#overlayBody').colorbox();
+
+});
+
 $('#addPost').click(function(){
 	
 	
@@ -17,7 +23,7 @@ $('#addPost').click(function(){
 				if(obj.stat == 'OK')
 				{
 					
-					$('#post').val('');
+					$('#post').val("");
 					$('#postMain').prepend('<div id="love'+obj.pid+'"></div>');
 					$('#love'+obj.pid).css('display', 'none').append(obj.div).slideDown('fast');
 				}

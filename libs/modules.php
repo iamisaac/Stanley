@@ -27,9 +27,12 @@ class layout
 		<link href="css/ext/lighview/lighview.css" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="js/jq190.js"></script>
+		
 		</head>
 		<body>
-		<div id="main">';
+		<div id="main">
+		';
+				
 		
 		
 	}
@@ -67,9 +70,12 @@ class layout
 		<script type="text/javascript" src="js/ext/lightview/lightview.js"></script>
 		<script type="text/javascript" src="js/ext/tipped/tipped.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/ext/colorbox.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) { $(\'.tipped\').each(function(){ Tipped.create(this); }); });
 		</script>
+		<div id="overlayBody"><div id="ovInside"></div></div>
+		<div id="searchArea"><div id="searchBody"></div></div>
 		</body>
 		</html>';
 		
