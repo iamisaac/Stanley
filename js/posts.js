@@ -1,13 +1,14 @@
 $('#addPost').click(function(){
 	
+	
+	
 	$.ajax({
 		url: './ajax/addpost.php',
 		type: 'POST',
 		data: {body: $('#post').val(), cat: $('#cat').val()},
 		success:function(res)
 		{
-			alert(res);
-			
+
 			var obj = jQuery.parseJSON(res);
 			
 			if(typeof obj == 'object')
@@ -17,7 +18,7 @@ $('#addPost').click(function(){
 				{
 					
 					$('#post').val('');
-					$('#postMain').append('<div id="love'+obj.pid+'"></div>');
+					$('#postMain').prepend('<div id="love'+obj.pid+'"></div>');
 					$('#love'+obj.pid).css('display', 'none').append(obj.div).slideDown('fast');
 				}
 				

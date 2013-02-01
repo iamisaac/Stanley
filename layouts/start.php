@@ -19,26 +19,28 @@ $layout->baner();
 		<div class="sp1">
 
 		<?php
-			
+			echo '<ul style="list-style: none; margin: 0px; ">';
 			$resp = $db->query("SELECT * FROM categories");
 			while($tmp = $resp->fetch_assoc())
 			{
-				echo '<a href="" class="big">'.ucfirst($tmp['name']).'</a>';
+				echo '<li><div class="box" style="background:'.$tmp['color'].'"></div><a href="" class="big">'.ucfirst($tmp['name']).'</a></li>';
 			}
-			
+			echo '</ul>';
 			unset($resp, $tmp);
 		?>
 		</div>
-		<div class="sp2">		
-		<?php 
-						
-			$posts->name  = $name;
-			$posts->pic   = $pic;
-			$posts->mem   = $mem;
-			$posts->db    = $db;
-			$posts->create();
-			
-		?>	
+		<div class="sp2">
+			<div id="startMainArea">		
+			<?php 
+							
+				$posts->name  = $name;
+				$posts->pic   = $pic;
+				$posts->mem   = $mem;
+				$posts->db    = $db;
+				$posts->create();
+				
+			?>
+			</div>	
 		</div>
 		<div class="sp3">
 

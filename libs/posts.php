@@ -23,10 +23,13 @@ class posts
 					</tr>
 					<tr><td colspan="2">
 						<table>
-						<tr><td style="width: 400px;">	
+						<tr><td style="width: 190px;">	
 						<input type="dropbox-chooser" name="selected-file" id="db-chooser"/>
 						</td>
-						<td style="width: 200px; text-align: right;">
+						<td>
+							<img src="gfx/camera.png" />
+						</td>
+						<td style="width: 250px; text-align: right;">
 						<label>
 							<select id="cat" name="cat">';
 							
@@ -54,12 +57,13 @@ class posts
 			</div>';	
 	}
 	
+	
 	public function fetchUsers($id)
 	{
 		
 		if(isset($this->mem))
 		{
-			$sql   = "SELECT * FROM users WHERE id='$id'";
+			$sql   = "SELECT * FROM users WHERE id='$id' LIMIT 1";
 			$key    = md5('stanley'.$sql);
 			$data3  = $this->mem->get($key);
 			
@@ -179,6 +183,8 @@ class posts
 					
 					while(@$data[$i])
 					{
+						$cat = $data[$i]['cat'];
+						$cat = $this->db->query("SELECT * FROM categories WHERE id='$cat' LIMIT 1")->fetch_assoc();
 						
 						echo '<div class="post" id="post'.$data[$i]['id'].'">
 								<table celpadding="0" cellspacing="0">
@@ -188,7 +194,7 @@ class posts
 										<td><a href="#" onclick="deletePost('.$data[$i]['id'].','.$data[$i]['cat'].')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>
-										<td></td>
+										<td valign="top"><div style="background:'.$cat['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($cat['name']),0, 1).'</div></td>
 										<td colspan="2" class="postBody">'.$data[$i]['body'].'<br /><br /></td>
 									</tr>
 									<tr>
@@ -200,7 +206,7 @@ class posts
 						echo			'</div></td>
 									</tr>
 									<tr>
-										<td></td>
+										<td valign="top" align="center"><img src="gfx/comment.png" /></td>
 										<td colspan="2">
 
 												<table celpadding="0" cellspacing="0">

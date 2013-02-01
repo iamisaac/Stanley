@@ -190,6 +190,16 @@ concrete classes
 
 }
 
+.box{
+	width: 15px;
+	height: 15px;
+	border: 1px solid #ccc;
+	float: left;
+	margin-top: 2px;
+	margin-right: 5px;
+	
+}
+
 /* <select> */
 select {
     padding:3px;
