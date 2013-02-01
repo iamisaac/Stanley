@@ -285,11 +285,30 @@ a.big:hover{color: silver; text-decoration: none;}
 	
 }
 
-#searchBody
-{
-	margin-left: auto;
-	margin-right: auto;
+#inputText
+{	
+	top: 53px;
+	font-size: 30px;
+	color: #fff;
 	position: relative;
+}
+
+.searchBody
+{
+	display: none;
+	padding: 10px;
+	top: 100px;
+	width: 995px;
+	border: 1px solid rgba(0,0,0,0.5);
+	border-top: 0px; 
+	border-radius: 0 0 4px 4px;  
+	-moz-border-radius-bottomleft: 4px; 
+	-moz-border-radius-bottomright: 4px; 
+	-webkit-border-bottom-left-radius: 4px; 
+	-webkit-border-bottom-right-radius: 4px;
+	height: auto;
+	background: rgba(0,0,0,0.5);
+	position: absolute;
 }
 
 /*

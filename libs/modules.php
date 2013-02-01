@@ -75,7 +75,12 @@ class layout
 			jQuery(document).ready(function($) { $(\'.tipped\').each(function(){ Tipped.create(this); }); });
 		</script>
 		<div id="overlayBody"><div id="ovInside"></div></div>
-		<div id="searchArea"><div id="searchBody"></div></div>
+		<div id="searchArea">
+			<div class="menu">
+				<div id="inputText"></div>
+				<div id="searchBody" class="searchBody"></div>
+			<div>		
+		</div>
 		</body>
 		</html>';
 		

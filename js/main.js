@@ -62,5 +62,67 @@ $('#search').blur(function()
 {
 	
 	$('#searchArea').slideUp('fast');
+	$('#inputText').css('color', '#fff');
 	
+});
+
+var query = '';
+var spec  = '';
+
+$('#search').keyup(function(event) {
+	
+
+	if($('#search').val() != query) {       
+		$('#inputText').html($(this).val());
+	}
+      
+	query = $('#search').val()
+	
+	if(query.length > 2)
+	{
+		
+		$('#searchBody').slideDown('fast');
+		
+		if(query == 'category' || query == 'categories' || query == 'user' || query == 'users')
+		{
+			spec = query;
+			$('#inputText').css('color', '#b1afa2');			
+		}
+				
+		
+		$.ajax({
+			url: './ajax/quicksearch.php',
+			type: 'post',
+			data: {q: query, spec: spec},
+			success: function(res){
+				
+				var obj = jQuery.parseJSON(res)
+				
+				if(typeof obj == 'object')
+				{
+					
+					if(obj.stat == 'OK')
+					{
+						$('#searchBody').html(obj.div);
+					}
+					
+				}
+				
+			}
+		});
+
+
+	}else
+	{ 
+		$('#searchBody').slideUp('fast');
+		$('#inputText').css('color', '#fff');	
+		
+	}
+	
+	if(event.keyCode != 13)
+	{
+		
+	}	
+	
+
 });
