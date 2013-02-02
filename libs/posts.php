@@ -58,7 +58,7 @@ class posts
 					    <form>
 						    <div id="queue"></div>
 						    <br />
-						    <span style="padding: 5px; text-align: center; width: 580px;"><input id="file_upload" name="file_upload" type="file" multiple="true"></a>
+						    <div style="position: relative; left: 230px;""><input id="file_upload" name="file_upload" type="file" multiple="true"></div>
 					    </form>
 					    <br />
 					    <div id="preview"></div>
@@ -186,7 +186,8 @@ class posts
 						 
 					 $this->mem->set($key, $tmp_arr, MEMCACHE_COMPRESSED, 864000);
 					 $data = $this->mem->get($key); unset($tmp_arr);
-					
+
+                    unset($tmp);
 				}
 				
 				if(count($data)>0)
@@ -196,7 +197,9 @@ class posts
 					
 					while(@$data[$i])
 					{
-						$cat = $data[$i]['cat'];
+
+                        $pid = $data[$i]['id'];
+                        $cat = $data[$i]['cat'];
 						$cat = $this->db->query("SELECT * FROM categories WHERE id='$cat' LIMIT 1")->fetch_assoc();
 						
 						echo '<div class="post" id="post'.$data[$i]['id'].'">
@@ -211,9 +214,24 @@ class posts
 									</tr>
 									<tr>
 										<td valign="top"><div style="background:'.$cat['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($cat['name']),0, 1).'</div></td>
-										<td colspan="2" class="postBody">'.$data[$i]['body'].'<br /><br /></td>
-									</tr>
-									<tr>
+										<td colspan="2" class="postBody">'.$data[$i]['body'].'</td>
+									</tr>';
+
+                                    if($data[$i]['files'] == 1)
+                                    {
+                                        echo '<tr><td></td><td colspan="2" style="width: 500px; text-align: center;">';
+
+                                        $tmp = $this->db->query("SELECT * FROM images WHERE pid='$pid'");
+
+                                        while($tmp2 = $tmp->fetch_assoc())
+                                        {
+                                            echo '<a href="'.str_replace('_cube_', '_optim_', $tmp2['linkCube']).'" class="lightview" data-lightview-group="group'.$pid.'"><img src="'.$tmp2['linkCube'].'" /></a> ';
+                                        }
+                                        unset($tmp, $tmp2);
+                                        echo '</td></tr>';
+                                    }
+
+				        echo		'<tr>
 										<td></td>
 										<td colspan="2"><div id="commentSpace">';
 										
@@ -228,12 +246,12 @@ class posts
 												<table celpadding="0" cellspacing="0">
 												<tr>
 													<td colspan="2">
-													<div id="newComment'.$data[$i]['id'].'"></id>
+													<div id="newComment'.$pid.'"></id>
 													</td>
 												</tr>		
 												<tr>
 													<td><img src="'.$this->pic.'" width="25" height="25" /></td>
-													<td><input type="text" id="commentBody'.$data[$i]['id'].'" name="commentBody'.$data[$i]['id'].'" class="commentBody" onkeypress="return addcomment(event, '.$data[$i]['id'].')" /></td>
+													<td><input type="text" id="commentBody'.$pid.'" name="commentBody'.$pid.'" class="commentBody" onkeypress="return addcomment(event, '.$pid.')" /></td>
 												</tr>
 												</table>
 

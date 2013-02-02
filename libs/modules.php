@@ -26,13 +26,13 @@ class layout
 		
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/tipped/tipped.css" rel="stylesheet" type="text/css" />
-		<link href="css/ext/lighview/lighview.css" rel="stylesheet" type="text/css" />
+		<link href="css/ext/lightview/lightview.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/uploadfive.css" rel="stylesheet" type="text/css" />
 		
 		<script type="text/javascript" src="js/jq/jq190.js"></script>
 		</head>
 		<body>
-		<div id="main">
+		<div id="mainContainer">
 		';
 				
 		
@@ -76,7 +76,6 @@ class layout
 		<script type="text/javascript" src="js/ext/lightview/lightview.js"></script>
 		<script type="text/javascript" src="js/ext/tipped/tipped.js"></script>
 		<script type="text/javascript" src="js/ext/uploadfive.js"></script>
-		<script type="text/javascript" src="js/ext/tools.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) { $(\'.tipped\').each(function(){ Tipped.create(this); }); });

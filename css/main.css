@@ -7,7 +7,7 @@ html, body
 
 
 
-#main
+#mainContainer
 {
 	background-color: #53646C; 
 	width:100%;
@@ -180,7 +180,7 @@ concrete classes
 
 .textarea
 {
-	width: 490px;
+	width: 510px;
 	height: 90px;
 	border: 1px solid gray;
 	border-radius: 4px;
@@ -267,7 +267,7 @@ a.big:hover{color: silver; text-decoration: none;}
 	border-radius: 4px;
     -moz-border-radius: 4px; 
     -webkit-border-radius: 4px;
-	width: 490px;
+	width: 510px;
 	height: 30px;
 	font-size: 18px;
 	color: #53646C;
@@ -345,7 +345,7 @@ same animations
 #startUploadPhoto
 {
     display:none;
-    width: 570px;
+    width: 586px;
     z-index: 600000;
     border:10px solid #666;
     border:10px solid rgba(82, 82, 82, 0.698);

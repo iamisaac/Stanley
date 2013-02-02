@@ -42,10 +42,11 @@ if(strlen($body)<4096 && strlen($body)>3)
 
                 //requires better algoritm which do make so many mysql requests
 
-                $baza->query("UPDATE images SET pid='$pid' WHERE id='$upid'");
+                $db->query("UPDATE images SET pid='$pid' WHERE id='$upid'");
             }
 
-            $baza->query("UPDATE posts SET files=1 WHERE id='$pid'");
+            $db->query("UPDATE posts SET files=1 WHERE id='$pid'");
+            unset($tmpArray);
         }
 		if(isset($mem))
 		{

@@ -21,8 +21,10 @@ $layout->baner();
 		<div class="sp1">
 
 		<?php
-			echo '<ul style="list-style: none; margin: 0px";>';
-			$resp = $db->query("SELECT * FROM categories");
+			echo '<ul style="list-style: none; margin: 0px";>
+			      <li><div class="box"></div><a class="big" href="?cat=0">ALL</a></li>';
+
+            $resp = $db->query("SELECT * FROM categories");
 			while($tmp = $resp->fetch_assoc())
 			{
 				echo '<li><div class="box" style="background:'.$tmp['color'].'"></div><a href="?cat='.$tmp['id'].'" class="big">'.ucfirst($tmp['name']).'</a></li>';
@@ -56,20 +58,24 @@ $layout->baner();
 <script type="text/javascript">
 $(function() {
     $('#file_upload').uploadifive({
-       'auto'         : true,
+        'auto'         : true,
         'simUploadLimit' : 1,
         'fileSizeLimit' : '4096KB',
         'uploadLimit' : 4,
         'queueID'      : 'queue',
-        'uploadScript' : '../ajax/uploadifive-image-target.php?target=<?php echo $what; ?>',
-        'onUploadComplete' : function(file, data)
+        'uploadScript' : '../libs/uploadifive-image-target.php?target=<?php echo $what; ?>',
+        'onUploadComplete' : function(file, res)
         {
+            var obj = jQuery.parseJSON(res);
 
-            var obj = jQuery.parseJSON(data);
+            alert(res);
 
             if(typeof obj == 'object')
             {
-                $('#preview').append('<img src="'+obj.url+'" width="40" height="40"  /> ');
+                if(obj.stat == 'OK')
+                {
+                    $('#preview').append('<img src="'+obj.url+'" width="40" height="40"  /> ');
+                }
             }
         }       
      });

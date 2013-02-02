@@ -6,6 +6,9 @@ require_once('config.php');
 require_once('ext/imagemap/WideImage.php');
 require_once('ext/cloudfiles/cloudfiles.php');
 
+error_reporting(E_ALL|E_STRICT);
+ini_set('display_errors', 'on');
+
 function createRandomPassword() {
     $chars = "abcdefghijkmnopqrstuvwxyz0123456789";
     srand((double)microtime()*1000000);
@@ -20,19 +23,16 @@ function createRandomPassword() {
     return $pass;
 }
 
-$target = $_GET['target'];
+$target = $_REQUEST['target'];
 
-if(empty($db))   $db         = connect();
+if(empty($db))   $db         =  connect();
                  $imgmap     =  new WideImage();
-                 $id         =  $_SESSION['$id'];
+                 $id         =  $_SESSION['id'];
 				 $login      =  $id;
 
-function errorHandler($errno, $errstr, $errfile, $errline) {return true;}
-$old_error_handler = set_error_handler("errorHandler");
 
-$array   = array('start', 'profile', 'messages', 'admin', 'files');
-$output  = array();
-
+$array = array('start', 'profile', 'messages', 'admin', 'files');
+$json  = array();
 
 if(in_array($target, $array))
 {
@@ -52,7 +52,6 @@ if(in_array($target, $array))
 
         // Check if the file has a width and height
         $uploadDir = '../users/'.$login.'/';
-
 
         // Check if the file has a width and height
         function isImage($tempFile) {
@@ -84,7 +83,7 @@ if(in_array($target, $array))
                 $targetFile           = $uploadDir . $fn;
                 $error                = 0;
 
-                if(!is_dir('../users/'.$login)) mkdir('../users/'.$login);
+                if(!is_dir($uploadDir)) mkdir($uploadDir);
 
                 // Validate the file type
                 $fileTypes = array('jpg', 'jpeg', 'gif', 'png', 'JPG', 'JPEG', 'GIF', 'PNG'); // Allowed file extensions
@@ -96,7 +95,11 @@ if(in_array($target, $array))
                     // Save the file
                     if(move_uploaded_file($tempFile, $targetFile))
                     {
+
+
                         list($szer, $wys) = getimagesize($targetFile);
+
+                        $json['add'] = 1;
 
                         if($szer>90 && $wys>90)
                         {
@@ -181,42 +184,52 @@ if(in_array($target, $array))
                         if($error == 0)
                         {
 
+                            $json['stat'] = 'OK';
+
                             $url  =  str_replace(' ', '','https://baa4734103bafcc1e1a0-1e54df3c7b80492f9c27542cf6bc48c3.ssl.cf2.rackcdn.com/'.$target.'/_cube_'.$fn);
-							$url2 =  str_replace(' ', '','https://baa4734103bafcc1e1a0-1e54df3c7b80492f9c27542cf6bc48c3.ssl.cf2.rackcdn.com/'.$target.'/'.$fn);
-                            $db->query("INSERT INTO images SET uid='$id', target='$target', link='$url2', linkCube='$url'");
 
-                            $output['id']     = $db->insert_id;
-                            $output['url']    = $url;
-                            $output['target'] = $target;
+                            $db->query("INSERT INTO images SET uid='$id', target='$target', link='$fn', linkCube='$url'");
 
-                            $json = json_encode($output);
+                            $json['id']     = $db->insert_id;
+                            $json['url']    = $url;
+                            $json['target'] = $target;
+
+
 
                             if(empty($_SESSION['tmpArray']))
                             {
-                                $_SESSION['tmpArray'][0] = $output;
+                                $_SESSION['tmpArray'][0] = $json;
                             }
                             else
                             {
                                 $tmpArray = $_SESSION['tmpArray'];
-                                array_push($tmpArray, $output);
+                                array_push($tmpArray, $json);
                                 $_SESSION['tmpArray'] = $tmpArray;
                             }
 
 
-                            echo $json;
+
+                        }else
+                        {
+                            $json['e'] = 10;
                         }
 
-						unset($url, $url2, $output, $object, $imgmap);
+
+
                     }
 
                 } else {
 
+                    $json['e'] = 9;
                     // The file type wasn't allowed
                     echo 'Invalid file type.';
                 }
             }
-        }
+        }else $json['e'] = 8;
     }
 }
+
+unset($url, $url2, $object, $imgmap);
+echo json_encode($json);
 
 ?>
