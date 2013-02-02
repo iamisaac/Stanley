@@ -21,14 +21,15 @@ class layout
 		<title>'.$title.'</title>
 		
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		
+		<meta content="noodp, noydir" name="robots"></meta>
+		<meta id="meta_referrer" content="default" name="referrer"></meta>
 		
 		<link href="css/main.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/tipped/tipped.css" rel="stylesheet" type="text/css" />
 		<link href="css/ext/lighview/lighview.css" rel="stylesheet" type="text/css" />
+		<link href="css/ext/uploadfive.css" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript" src="js/jq190.js"></script>
-		
+		<script type="text/javascript" src="js/jq/jq190.js"></script>
 		</head>
 		<body>
 		<div id="main">
@@ -74,12 +75,12 @@ class layout
 		<script type="text/javascript" src="js/ext/spinners/spinners.min.js"></script>
 		<script type="text/javascript" src="js/ext/lightview/lightview.js"></script>
 		<script type="text/javascript" src="js/ext/tipped/tipped.js"></script>
+		<script type="text/javascript" src="js/ext/uploadfive.js"></script>
+		<script type="text/javascript" src="js/ext/tools.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/ext/colorbox.js"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) { $(\'.tipped\').each(function(){ Tipped.create(this); }); });
 		</script>
-		<div id="overlayBody"><div id="ovInside"></div></div>
 		<div id="searchArea">
 			<div class="menu">
 				<div id="inputText"></div>

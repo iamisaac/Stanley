@@ -2,17 +2,19 @@
 //basic configuration
 define('bgMain', 'CHANGE_ME');
 define('title', 'CHANGE_ME')
-
 //database
-define('dbhost', 'localhost');
+define('dbhost', 'CHANGE_ME');
 define('dblog', 'CHANGE_ME');
 define('dbpass', 'CHANGE_ME');
 define('dbname', 'CHANGE_ME');
 
 //cloud services
-
+define('cluser', 'CHANGE_ME');
+define('clkey', 'CHANGE_ME');
+define('clcon', 'CHANGE_ME');
 //dropbox
 define('dbchooser', 'CHANGE_ME');
 //facebook
 define('fbid', 'CHANGE_ME');
 define('fbsec', 'CHANGE_ME');
+//tweeter

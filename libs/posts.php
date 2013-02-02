@@ -53,8 +53,21 @@ class posts
 						</table>
 					</td>
 					</tr>
-				</table><br /><br /><br />
-			</div>';	
+					<tr><td colspan="2"><br />
+					<div id="startUploadPhoto">
+					    <form>
+						    <div id="queue"></div>
+						    <br />
+						    <span style="padding: 5px; text-align: center; width: 580px;"><input id="file_upload" name="file_upload" type="file" multiple="true"></a>
+					    </form>
+					    <br />
+					    <div id="preview"></div>
+					</div>
+					</td></tr>
+				</table><br /><br />
+			</div>
+		
+			';	
 	}
 	
 	
@@ -246,11 +259,6 @@ class posts
 		$this->createForm();
 		$this->fetchPosts();
 		
-		echo '
-		<!-- adding script for posts -->
-		<script type="text/javascript" src="js/posts.js"></script>
-		<!-- end -->
-		';
 	}
 	
 }

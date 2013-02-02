@@ -52,4 +52,29 @@ $layout->baner();
 		</div>	
 	</div>
 </div>
+
+<script type="text/javascript">
+$(function() {
+    $('#file_upload').uploadifive({
+       'auto'         : true,
+        'simUploadLimit' : 1,
+        'fileSizeLimit' : '4096KB',
+        'uploadLimit' : 4,
+        'queueID'      : 'queue',
+        'uploadScript' : '../ajax/uploadifive-image-target.php?target=<?php echo $what; ?>',
+        'onUploadComplete' : function(file, data)
+        {
+
+            var obj = jQuery.parseJSON(data);
+
+            if(typeof obj == 'object')
+            {
+                $('#preview').append('<img src="'+obj.url+'" width="40" height="40"  /> ');
+            }
+        }       
+     });
+});
+</script>
+
 <script type="text/javascript" src="https://www.dropbox.com/static/api/1/dropbox.js" id="dropboxjs" data-app-key="<?php echo dbchooser; ?>"></script>
+<script type="text/javascript" src="js/posts.js"></script>

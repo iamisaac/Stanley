@@ -30,7 +30,23 @@ if(strlen($body)<4096 && strlen($body)>3)
 	{
 		
 		$pid = $db->insert_id;
-		
+        if(isset($_SESSION['tmpArray']))
+        {
+
+            $tmpArray = $_SESSION['tmpArray'];
+            unset($_SESSION['tmpArray']);
+            //add the script of signing files;
+            foreach($tmpArray as $key=>$value)
+            {
+                $upid = $value['id'];
+
+                //requires better algoritm which do make so many mysql requests
+
+                $baza->query("UPDATE images SET pid='$pid' WHERE id='$upid'");
+            }
+
+            $baza->query("UPDATE posts SET files=1 WHERE id='$pid'");
+        }
 		if(isset($mem))
 		{
 			

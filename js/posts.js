@@ -1,13 +1,8 @@
 $('#addPhotos').click(function(){
-	
-	$('#overlayBody').colorbox();
-
+	$('#startUploadPhoto').animate({opacity: 1, height: 'toggle'}, 200, function() {});
 });
 
 $('#addPost').click(function(){
-	
-	
-	
 	$.ajax({
 		url: './ajax/addpost.php',
 		type: 'POST',

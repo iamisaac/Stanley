@@ -342,19 +342,15 @@ same animations
 
 */
 
-#overlayBody{
+#startUploadPhoto
+{
     display:none;
-    width: 600px;
+    width: 570px;
     z-index: 600000;
     border:10px solid #666;
     border:10px solid rgba(82, 82, 82, 0.698);
     border-radius: 8px; //opera
     -moz-border-radius:8px;
     -webkit-border-radius:8px;
-}
-
-#overlayBody div{
-    padding:10px;
-    background: #ffffff;
 }
 
