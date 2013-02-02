@@ -7,7 +7,7 @@ class posts
 	public $mem;
 	public $name;
 	public $pic;
-	public $cat = 1;
+	public $cat = 0;
 	public $lang;
 	
 	public function createForm()
@@ -151,10 +151,10 @@ class posts
 			
 		if(isset($this->mem))
 		{
-				if(@$this->cat == 1)
+				if(@$this->cat == 0)
 					$sql    = "SELECT * FROM posts ORDER BY date DESC";
 				else
-					$sql	= "SELECT * FROM posts WHERE cat='$cat' ORDER BY date DESC"; 
+					$sql	= "SELECT * FROM posts WHERE cat='".$this->cat."' ORDER BY date DESC"; 
 						
 				$key     =  md5('stanley'.$sql);
 				$data    =  $this->mem->get($key);

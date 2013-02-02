@@ -7,6 +7,7 @@ class layout
 	public $name;
 	public $pic;
 	public $appid;
+	public $what = 'start';
 	
 	public function up($title = '...')
 	{
@@ -40,30 +41,34 @@ class layout
 	public function down()
 	{
 		
-		echo
-		'
-		</div>
-		<div id="fb-root"></div>
-		<script>
-		  window.fbAsyncInit = function() {
-		    FB.init({
-		      appId:'.$this->appid.',
-		      cookie: true,
-		      xfbml: true,
-		      oauth: true
-		    });
-		    FB.Event.subscribe(\'auth.login\', function(response) {
-		      window.location.reload();
-		    });
-		  };
-		  (function() {
-		    var e = document.createElement(\'script\'); e.async = true;
-		    e.src = document.location.protocol +
-		      "//connect.facebook.net/en_US/all.js";
-		    document.getElementById(\'fb-root\').appendChild(e);
-		  }());
-		</script>
-		<!--[if lt IE 9]>
+		echo '</div>';
+
+        if(isset($this->appid))
+        {
+            echo '
+            <div id="fb-root"></div>
+            <script>
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId:'.$this->appid.',
+                  cookie: true,
+                  xfbml: true,
+                  oauth: true
+                });
+                FB.Event.subscribe(\'auth.login\', function(response) {
+                  window.location.reload();
+                });
+              };
+              (function() {
+                var e = document.createElement(\'script\'); e.async = true;
+                e.src = document.location.protocol +
+                  "//connect.facebook.net/en_US/all.js";
+                document.getElementById(\'fb-root\').appendChild(e);
+              }());
+            </script>';
+        }
+        echo
+		'<!--[if lt IE 9]>
 			<script type="text/javascript" src="js/ext/excanvas/excanvas.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="js/ext/spinners/spinners.min.js"></script>
@@ -89,12 +94,14 @@ class layout
 	public function baner()
 	{
 		
+		if($this->what == 'start'){ $url = '?w=profile'; $cl = 'Profile'; } else { $url = '/'; $cl = 'Start'; }
+		
 		echo '
 		<div class="topBaner">
 		<div class="menu">
 			<table>
 				<tr>
-					<td><a href="?w=profile"><img src="'.$this->pic.'" width="35" height="35" border="0" /></a></td>
+					<td><a href="'.$url.'"><img src="'.$this->pic.'" width="35" height="35" border="0" class="tipped" title="'.$cl.'" /></a></td>
 					<td style="width: 263px;"><span class="upName">'.$this->name.'</span></td>
 					<td style="width: 600px;">
 						<input id="search" name="search" class="search"></input>
@@ -104,6 +111,8 @@ class layout
 			</table>	
 		</div>
 		</div>';
+		
+		unset($url, $cl);
 	}
 	
 	public function categories()

@@ -83,7 +83,8 @@ $('#search').keyup(function(event) {
 		
 		$('#searchBody').slideDown('fast');
 		
-		if(query == 'category' || query == 'categories' || query == 'user' || query == 'users')
+		if(query == 'category' || query == 'categories' || query == 'user' || query == 'users'
+		   query == 'file' || query =='files')
 		{
 			spec = query;
 			$('#inputText').css('color', '#b1afa2');			

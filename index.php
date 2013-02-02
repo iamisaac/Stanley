@@ -13,45 +13,6 @@ require_once('libs/database.php');
 require_once('libs/modules.php');
 require_once('libs/lang.php');
 
-
-
-/*
-Facebook, Twitter, Instagram
-*/
-
-require_once('libs/ext/facebook/facebook.php');
-
-if(class_exists('Facebook'))
-{
-
-
-		$fb = new Facebook(array(
-		  'appId'  => fbid,
-		  'secret' => fbsec,
-		));
-	
-		$user   = $fb->getUser();
-		$fblog  = $fb->getLoginUrl(
-            array(
-                'scope'         => 'email,user_religion_politics,offline_access,publish_stream,user_birthday,
-                					user_location,user_work_history,user_about_me,user_hometown,user_likes,user_interests',
-                'redirect_uri'  => 'http://shen.jointheway.com/'
-            ));
-		
-		if ($user) 
-		{
-		  	try
-		  	{
-		  
-		    	$user_profile = $fb->api('/me');
-		  
-		  	} catch (FacebookApiException $e) 
-		  	{
-		  
-		  	}
-		}
-
-}
 /*
 GET area -> everything what is needed is better to take right now
 */
@@ -93,7 +54,6 @@ $user      		= null;
 $posts 			= null;
 $lang       	= setLanguage();
 $layout     	= new layout();
-$layout->appid	= $fb->getAppID();
 $layout->db 	= $db;
 
 
@@ -115,6 +75,7 @@ if(isset($_SESSION['id']))
 	{
 	
 		$user = $db->query("SELECT * FROM users WHERE id='$id' LIMIT 1")->fetch_assoc();
+		$layout->what = $what;
 			
 		switch($what)
 		{
@@ -126,7 +87,9 @@ if(isset($_SESSION['id']))
 			}
 			case 'profile':
 			{
+				
 				$layout->up();
+				
 				require('layouts/profile.php');
 				break;
 			}
@@ -165,6 +128,40 @@ if(isset($_SESSION['id']))
 	/*
 	login page
 	*/
+    require_once('libs/ext/facebook/facebook.php');
+
+    if(class_exists('Facebook'))
+    {
+
+
+        $fb = new Facebook(array(
+            'appId'  => fbid,
+            'secret' => fbsec,
+        ));
+
+        $user   = $fb->getUser();
+        $fblog  = $fb->getLoginUrl(
+            array(
+                'scope'         => 'email,user_religion_politics,offline_access,publish_stream,user_birthday,
+                					user_location,user_work_history,user_about_me,user_hometown,user_likes,user_interests',
+                'redirect_uri'  => 'http://shen.jointheway.com/'
+            ));
+
+        if ($user)
+        {
+            try
+            {
+
+                $user_profile = $fb->api('/me');
+
+            } catch (FacebookApiException $e)
+            {
+
+            }
+        }
+
+    }
+    $layout->appid	= $fb->getAppID();
 	$layout->up('Enter!');
 	require('layouts/enter.php');
 	$layout->down();

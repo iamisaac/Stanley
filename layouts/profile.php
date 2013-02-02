@@ -14,10 +14,9 @@ $layout->baner();
 			
 		</div>
 		<div class="sp2">
-		<?php 
-						
 			
-		?>	
+			
+			
 		</div>
 		<div class="sp3">
 			

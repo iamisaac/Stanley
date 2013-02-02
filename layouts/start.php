@@ -1,6 +1,8 @@
 <?php
 require_once('libs/posts.php');
 
+if(isset($_GET['cat'])) $cat = $_GET['cat']; else $cat = 0;
+
 $posts      = new posts();
 $posts->db  = $db;
 $posts->mem = $mem;
@@ -19,24 +21,27 @@ $layout->baner();
 		<div class="sp1">
 
 		<?php
-			echo '<ul style="list-style: none; margin: 0px; ">';
+			echo '<ul style="list-style: none; margin: 0px";>';
 			$resp = $db->query("SELECT * FROM categories");
 			while($tmp = $resp->fetch_assoc())
 			{
-				echo '<li><div class="box" style="background:'.$tmp['color'].'"></div><a href="" class="big">'.ucfirst($tmp['name']).'</a></li>';
+				echo '<li><div class="box" style="background:'.$tmp['color'].'"></div><a href="?cat='.$tmp['id'].'" class="big">'.ucfirst($tmp['name']).'</a></li>';
+				if($tmp['id'] == $cat) $posts->cat = $cat;
 			}
 			echo '</ul>';
+			
 			unset($resp, $tmp);
 		?>
 		</div>
 		<div class="sp2">
 			<div id="startMainArea">		
 			<?php 
-							
+				
+									
 				$posts->name  = $name;
 				$posts->pic   = $pic;
 				$posts->mem   = $mem;
-				$posts->db    = $db;
+				$posts->db    = $db;		
 				$posts->create();
 				
 			?>
