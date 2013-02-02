@@ -106,7 +106,7 @@ class layout
 					<td style="width: 600px;">
 						<input id="search" name="search" class="search"></input>
 					</td>				
-					<td style="text-align: right; width: 70px;"><a href="#"><img id="logout" class="tipped" title="Exit" src="gfx/poweroff.gif" width="20" height="20" border="0" /></a></td>
+					<td style="text-align: right; width: 100px;"><a href="#"><img id="logout" class="tipped" title="Exit" src="gfx/poweroff.gif" width="20" height="20" border="0" /></a></td>
 				</tr>
 			</table>	
 		</div>

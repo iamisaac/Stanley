@@ -68,8 +68,6 @@ $(function() {
         {
             var obj = jQuery.parseJSON(res);
 
-            alert(res);
-
             if(typeof obj == 'object')
             {
                 if(obj.stat == 'OK')

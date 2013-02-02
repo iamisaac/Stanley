@@ -6,9 +6,6 @@ require_once('config.php');
 require_once('ext/imagemap/WideImage.php');
 require_once('ext/cloudfiles/cloudfiles.php');
 
-error_reporting(E_ALL|E_STRICT);
-ini_set('display_errors', 'on');
-
 function createRandomPassword() {
     $chars = "abcdefghijkmnopqrstuvwxyz0123456789";
     srand((double)microtime()*1000000);

@@ -89,7 +89,6 @@ if(isset($_SESSION['id']))
 			{
 				
 				$layout->up();
-				
 				require('layouts/profile.php');
 				break;
 			}
@@ -109,7 +108,6 @@ if(isset($_SESSION['id']))
 			{
 				$layout->up();
 				require('layouts/start.php');								
-				break;
 				break;
 			}
 		}
