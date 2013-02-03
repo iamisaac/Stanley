@@ -19,7 +19,7 @@ if(empty($mem))
 if($db->query("DELETE FROM posts WHERE id='$pid'"))
 {
 	
-	if($cat==1)
+	if($cat==0)
 	{
 		$sql = "SELECT * FROM posts ORDER BY date DESC";
 		$mem->delete(md5('stanley'.$sql));

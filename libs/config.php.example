@@ -18,3 +18,5 @@ define('dbchooser', 'CHANGE_ME');
 define('fbid', 'CHANGE_ME');
 define('fbsec', 'CHANGE_ME');
 //tweeter
+define('twkey', '');
+define('twsec', '');

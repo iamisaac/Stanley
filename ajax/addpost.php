@@ -46,13 +46,12 @@ if(strlen($body)<4096 && strlen($body)>3)
             }
 
             $db->query("UPDATE posts SET files=1 WHERE id='$pid'");
-            unset($tmpArray);
         }
 		if(isset($mem))
 		{
 			
 			
-			if($cat==1)
+			if($cat==0)
 			{
 				$sql = "SELECT * FROM posts ORDER BY date DESC";
 				$mem->delete(md5('stanley'.$sql));
@@ -98,8 +97,21 @@ if(strlen($body)<4096 && strlen($body)>3)
 									<tr>
 										<td valign="top"><div style="background:'.$tmp['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($tmp['name']),0, 1).'</div></td>
 										<td colspan="2" class="postBody">'.$body.'<br /><br /></td>
-									</tr>
-									<tr>
+									</tr>';
+
+                                    if(isset($tmpArray))
+                                    {
+                                        $errors['div'] = $errors['div'].'<tr><td></td><td colspan="2" style="width: 500px; text-align: center;">';
+
+                                        foreach($tmpArray as $key=>$value)
+                                        {
+                                            $errors['div'] = $errors['div'].'<a href="'.str_replace('_cube_', '_optim_', $value['url']).'" class="lightview" data-lightview-group="group'.$pid.'"><img src="'.$value['url'].'" /></a> ';
+                                        }
+
+                                        $errors['div'] = $errors['div'].'</td></tr>';
+                                    }
+
+        $errors['div'] = $errors['div'].'<tr>
 										<td valign="top" align="center"><img src="gfx/comment.png" /></td>
 										<td colspan="2">
 
@@ -130,6 +142,7 @@ else
 	$errors['len'] = 1;
 }
 
+unset($tmpArray);
 echo json_encode($errors);
 
 

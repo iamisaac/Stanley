@@ -61,7 +61,7 @@ $(function() {
         'auto'         : true,
         'simUploadLimit' : 1,
         'fileSizeLimit' : '4096KB',
-        'uploadLimit' : 4,
+        'uploadLimit' : 6,
         'queueID'      : 'queue',
         'uploadScript' : '../libs/uploadifive-image-target.php?target=<?php echo $what; ?>',
         'onUploadComplete' : function(file, res)

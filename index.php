@@ -127,6 +127,7 @@ if(isset($_SESSION['id']))
 	login page
 	*/
     require_once('libs/ext/facebook/facebook.php');
+    require_once('libs/ext/twitter/twitteroauth.php');
 
     if(class_exists('Facebook'))
     {
@@ -140,8 +141,7 @@ if(isset($_SESSION['id']))
         $user   = $fb->getUser();
         $fblog  = $fb->getLoginUrl(
             array(
-                'scope'         => 'email,user_religion_politics,offline_access,publish_stream,user_birthday,
-                					user_location,user_work_history,user_about_me,user_hometown,user_likes,user_interests',
+                'scope'         => 'email,user_religion_politics,publish_stream,user_birthday,user_location,user_work_history,user_about_me,user_hometown,user_likes,user_interests',
                 'redirect_uri'  => 'http://shen.jointheway.com/'
             ));
 
@@ -159,6 +159,8 @@ if(isset($_SESSION['id']))
         }
 
     }
+
+
     $layout->appid	= $fb->getAppID();
 	
 	$layout->up('Enter!');
