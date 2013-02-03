@@ -19,7 +19,7 @@ $('#addPost').click(function(){
 				
 				if(obj.stat == 'OK')
 				{
-                    $('#startUploadPhoto').animate({opacity: 1, height: 'toggle'}, 200, function() {});
+                    $('#startUploadPhoto').slideUp('fast');
 					$('#post').val("");
 					$('#postMain').prepend('<div id="love'+obj.pid+'"></div>');
 					$('#love'+obj.pid).css('display', 'none').append(obj.div).slideDown('fast');

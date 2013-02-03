@@ -56,8 +56,7 @@ class posts
 					<tr><td colspan="2"><br />
 					<div id="startUploadPhoto">
 					    <form>
-						    <div id="queue"></div>
-						    <br />
+						    <div id="queue" style="height: 60px;" class="tipped" title="Drag photos here"></div>
 						    <div style="position: relative; left: 230px;""><input id="file_upload" name="file_upload" type="file" multiple="true"></div>
 					    </form>
 					    <br />

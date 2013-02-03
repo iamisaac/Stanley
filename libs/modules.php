@@ -2,7 +2,9 @@
 
 class layout
 {
-	
+
+    const  VERSION = '0.0.0.9';
+
 	public $db;
 	public $name;
 	public $pic;
@@ -86,6 +88,7 @@ class layout
 				<div id="searchBody" class="searchBody"></div>
 			<div>		
 		</div>
+		<br /><br />
 		</body>
 		</html>';
 		
@@ -114,6 +117,12 @@ class layout
 		
 		unset($url, $cl);
 	}
+
+    public function clean()
+    {
+        unset($_SESSION['tmpArray']);
+        $this->db->close();
+    }
 	
 	public function categories()
 	{

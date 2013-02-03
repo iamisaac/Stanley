@@ -64,6 +64,7 @@ $(function() {
         'uploadLimit' : 6,
         'queueID'      : 'queue',
         'uploadScript' : '../libs/uploadifive-image-target.php?target=<?php echo $what; ?>',
+        'onDrop'       : function(file, fileDropCount) {},
         'onUploadComplete' : function(file, res)
         {
             var obj = jQuery.parseJSON(res);

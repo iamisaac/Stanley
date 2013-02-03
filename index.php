@@ -118,8 +118,6 @@ if(isset($_SESSION['id']))
 	{
 		
 	}
-	
-	
 
 }else
 {
@@ -166,8 +164,9 @@ if(isset($_SESSION['id']))
 	$layout->up('Enter!');
 	require('layouts/enter.php');
 	$layout->down();
-}	
-	
 
+}
+
+$layout->clean();
 
 ?>
