@@ -12,12 +12,12 @@ $layout->baner();
 	<div class="inside">	
 		<div class="sp1">
 			<ul>
-                <li></li>
+                <li>General</li>
                 <li>Privacy</li>
 			</ul>
 		</div>
 		<div class="sp2">
-            <img src="<?php echo $pic; ?>" />
+            <img src="<?php echo $pic; ?>" width="90" height="90" />
 		    <div id="profileArea">
 
 

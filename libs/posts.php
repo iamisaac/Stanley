@@ -156,26 +156,28 @@ class posts
 		}
 	}
 
-    public function evaluatePost($cat,$pid)
+    public function evaluatePost($cat, $pid)
     {
         $uid   = $_SESSION['id'];
 
-        $plus  = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND value=1")->num_rows;
-        $minus = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND value=0")->num_rows;
+        $plus  = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND cat='$cat' AND value=1")->num_rows;
+        $minus = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND cat='$cat' AND value=0")->num_rows;
 
-        $uvote = $this->db->query("SELECT value FROM evaluateComm WHERE uid='$uid' AND pid='$pid' AND (value=1 OR value=0)");
+        $uvote = $this->db->query("SELECT value FROM evaluate WHERE uid='$uid' AND cat='$cat' AND pid='$pid' AND (value=1 OR value=0)");
 
 
         echo '<span id="eCount'.$pid.'">'.($plus-$minus).'</span> ';
 
-        if($uvote->num_rows==0){
+        if($uvote->num_rows == 0){
+
             echo '<a href="#" onclick="evaluateComm('.$cat.','.$pid.', 0)"><img id="eMinus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif" border="0" /></a><a href="#" onclick="evaluateComm('.$cat.','.$pid.', 1)"><img id="ePlus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/up.gif" border="0" /></a>';
+
         }
         else
         {
             $vote = $uvote->fetch_assoc();
 
-            if($vote['value']==0)
+            if($vote['value'] == 0)
             {
                 echo '<a href="#" onclick="deleteEvComm('.$cat.','.$pid.')"><img id="eMinus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif" border="0" /></a><a href="#" onclick="evaluateComm('.$cat.','.$pid.', 1)"><img id="ePlus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/up2.gif" border="0" /></a>';
             }
@@ -186,13 +188,16 @@ class posts
 
 
         }
+        unset($uvote, $vote);
 
         return ($plus-$minus);
     }
 
 	public function fetchPosts()
 	{
-		
+
+        $postStat = array();
+
 		echo '<div id="postMain">';
 			
 		if(isset($this->mem))
@@ -231,23 +236,30 @@ class posts
 					while(@$data[$i])
 					{
 
-                        $pid = $data[$i]['id'];
-                        $cat = $data[$i]['cat'];
-						$cat = $this->db->query("SELECT * FROM categories WHERE id='$cat' LIMIT 1")->fetch_assoc();
+                        $pid  = $data[$i]['id'];
+                        $scat = $data[$i]['cat'];
+                        $userFetch = $this->fetchUsers($data[$i]['uid']);
+
+                        if(strlen(@$userFetch['img'])>0)	$pic = $userFetch['img']; else $pic = 'gfx/faces/23.png';
+                        if(strlen(@$userFetch['fname'])>0 && strlen($userFetch['sname'])>0) $name = $userFetch['fname'].' '.$userFetch['sname']; else $name = $userFetch['zhname'];
+
+						$dcat = $this->db->query("SELECT * FROM categories WHERE id='$scat' LIMIT 1")->fetch_assoc();
 						
 						echo '<div class="post" id="post'.$data[$i]['id'].'">
 								<table celpadding="0" cellspacing="0">
 									<tr>
-										<td><img src="'.$this->pic.'"  width="30" height="30" /></td>
-										<td style="width:550px; text-align: left;">'.$this->name.'
-										 '.$this->evaluatePost($cat,$pid).'
-										<br />
+										<td><img src="'.$pic.'"  width="30" height="30" /></td>
+										<td style="width:550px; text-align: left;">'.$name.'    ';
+
+                        $postStat[$pid] = $this->evaluatePost($scat,$pid);
+
+                        echo		    '<br />
 										<span class="dateFormat">'.$data[$i]['date'].'</span>
 										</td>
-										<td><a href="#" onclick="deletePost('.$pid.','.$cat.')"><img src="gfx/x.gif" /></a></td>
+										<td><a href="#" onclick="deletePost('.$pid.','.$scat.')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>
-										<td valign="top"><div style="background:'.$cat['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($cat['name']),0, 1).'</div></td>
+										<td valign="top"><div style="background:'.$dcat['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($dcat['name']),0, 1).'</div></td>
 										<td colspan="2" class="postBody">'.$data[$i]['body'].'</td>
 									</tr>';
 
@@ -269,7 +281,7 @@ class posts
 										<td></td>
 										<td colspan="2"><div id="commentSpace">';
 										
-										$this->fetchComments($data[$i]['id']);
+										$this->fetchComments($pid);
 										
 						echo			'</div></td>
 									</tr>
@@ -302,7 +314,7 @@ class posts
 		
 			
 		echo '</div>';
-		unset($tmp);		
+		unset($tmp, $postStat, $scat, $dcat, $pid);
 	
 	}
 	
