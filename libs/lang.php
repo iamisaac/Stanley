@@ -20,7 +20,29 @@ function setLanguage()
 	 
 	$code = substr($ipInfo["country"], 0, 3);
 
-	
+	switch ($code)
+    {
+        case 'en':
+        {
+
+            break;
+        }
+        case 'tw':
+        {
+
+            break;
+        }
+        case 'zh':
+        {
+
+            break;
+        }
+        default:
+        {
+
+            break;
+        }
+    }
 	
 	unset($ipInfo);
 }

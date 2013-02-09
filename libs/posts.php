@@ -155,7 +155,41 @@ class posts
 			echo '</div>';
 		}
 	}
-	
+
+    public function evaluatePost($cat,$pid)
+    {
+        $uid   = $_SESSION['id'];
+
+        $plus  = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND value=1")->num_rows;
+        $minus = $this->db->query("SELECT uid FROM evaluate WHERE pid='$pid' AND value=0")->num_rows;
+
+        $uvote = $this->db->query("SELECT value FROM evaluateComm WHERE uid='$uid' AND pid='$pid' AND (value=1 OR value=0)");
+
+
+        echo '<span id="eCount'.$pid.'">'.($plus-$minus).'</span> ';
+
+        if($uvote->num_rows==0){
+            echo '<a href="#" onclick="evaluateComm('.$cat.','.$pid.', 0)"><img id="eMinus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif" border="0" /></a><a href="#" onclick="evaluateComm('.$cat.','.$pid.', 1)"><img id="ePlus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/up.gif" border="0" /></a>';
+        }
+        else
+        {
+            $vote = $uvote->fetch_assoc();
+
+            if($vote['value']==0)
+            {
+                echo '<a href="#" onclick="deleteEvComm('.$cat.','.$pid.')"><img id="eMinus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif" border="0" /></a><a href="#" onclick="evaluateComm('.$cat.','.$pid.', 1)"><img id="ePlus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/up2.gif" border="0" /></a>';
+            }
+            else
+            {
+                echo '<a href="#" onclick="evaluateComm('.$cat.','.$pid.', 0)"><img id="eMinus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/down2.gif" border="0" /></a><a href="#" onclick="deleteEvComm('.$cat.','.$pid.')"><img id="ePlus'.$pid.'" src="https://c730088.ssl.cf2.rackcdn.com/gfx/up.gif" border="0" /></a>';
+            }
+
+
+        }
+
+        return ($plus-$minus);
+    }
+
 	public function fetchPosts()
 	{
 		
@@ -206,10 +240,11 @@ class posts
 									<tr>
 										<td><img src="'.$this->pic.'"  width="30" height="30" /></td>
 										<td style="width:550px; text-align: left;">'.$this->name.'
+										 '.$this->evaluatePost($cat,$pid).'
 										<br />
 										<span class="dateFormat">'.$data[$i]['date'].'</span>
 										</td>
-										<td><a href="#" onclick="deletePost('.$data[$i]['id'].','.$data[$i]['cat'].')"><img src="gfx/x.gif" /></a></td>
+										<td><a href="#" onclick="deletePost('.$pid.','.$cat.')"><img src="gfx/x.gif" /></a></td>
 									</tr>
 									<tr>
 										<td valign="top"><div style="background:'.$cat['color'].';, width: 30px; height: 30px; color: white; font-size: 23px; text-align: center;">'.substr(ucfirst($cat['name']),0, 1).'</div></td>

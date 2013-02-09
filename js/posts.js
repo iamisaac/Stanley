@@ -75,7 +75,61 @@ function addcomment(e, num)
 
 
 }
+/*
 
+EVALUATION POSTS
+
+ */
+
+function evaluateComm(cat, pid, value)
+{
+
+    $.ajax({
+        url: './ajax/evaluateComm.php',
+        type: 'post',
+        data: {cat: cat, pid: pid, value: value},
+        success: function(req)
+        {
+            if(value==0)
+            {
+                $('#eMinus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif');
+                $('#ePlus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/up2.gif');
+            }
+            else
+            {
+                $('#eMinus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/down2.gif');
+                $('#ePlus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/up.gif');
+            }
+
+            $('#eCount'+pid).html(req);
+            $('html,body').animate({scrollTop: $('#eCount'+cid).offset().top}, 1);
+        }
+    });
+
+}
+
+function deleteEvComm(cat, pid)
+{
+    $.ajax({
+        url: './ajax/deleteEvComm.php',
+        type: 'post',
+        data: {cat: cat, pid: pid},
+        success: function(req)
+        {
+
+            $('#eMinus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/down.gif');
+            $('#ePlus'+pid).attr('src', 'https://c730088.ssl.cf2.rackcdn.com/gfx/up.gif');
+            $('#eCount'+pid).html(req);
+            $('html,body').animate({scrollTop: $('#eCount'+pid).offset().top}, 1);
+
+        }
+    });
+}
+/*
+
+EVALUATION POSTS ENDS
+
+ */
 function deletePost(pid, cat)
 {
 	$.ajax({

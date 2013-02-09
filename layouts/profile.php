@@ -11,13 +11,19 @@ $layout->baner();
 <div class="mainArea native margin">
 	<div class="inside">	
 		<div class="sp1">
-			
+			<ul>
+                <li></li>
+                <li>Privacy</li>
+			</ul>
 		</div>
 		<div class="sp2">
-			
-			
-			
-		</div>
+            <img src="<?php echo $pic; ?>" />
+		    <div id="profileArea">
+
+
+
+		    </div>
+        </div>
 		<div class="sp3">
 			
 		</div>	
