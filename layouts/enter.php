@@ -1,5 +1,5 @@
 <div class="mainArea">
-	<div class="loginArea">
+	<div class="loginArea" style="background: url(../gfx/bgMain.jpg) no-repeat;">
 		<div id="loginPanel">
 		
 			<input class="log" type="text" id="email" name="email" />

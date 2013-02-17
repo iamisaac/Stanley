@@ -44,7 +44,7 @@ else
 {
 
 	echo 'Need memcache to run';
-	exit;
+	die;
 
 }
 
@@ -156,11 +156,9 @@ if(isset($_SESSION['id']))
             }
         }
 
+        $layout->appid	= $fb->getAppID();
     }
 
-
-    $layout->appid	= $fb->getAppID();
-	
 	$layout->up('Enter!');
 	require('layouts/enter.php');
 	$layout->down();

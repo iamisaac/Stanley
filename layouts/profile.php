@@ -8,12 +8,13 @@ $layout->pic   = $pic;
 $layout->baner();
 
 ?>
+<link href="css/ext/checkbox.css" rel="stylesheet" type="text/css" />
 <div class="mainArea native margin">
 	<div class="inside">	
 		<div class="sp1">
 			<ul>
-                <li>General</li>
-                <li>Privacy</li>
+                <li><a href="" class="big">General</a></li>
+                <li><a href="" class="big">Privacy</a></li>
 			</ul>
 		</div>
 		<div class="sp2">
