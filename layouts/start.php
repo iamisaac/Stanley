@@ -3,9 +3,10 @@ require_once('libs/posts.php');
 
 if(isset($_GET['cat'])) $cat = $_GET['cat']; else $cat = 0;
 
-$posts      = new posts();
-$posts->db  = $db;
-$posts->mem = $mem;
+$posts       = new posts();
+$posts->db   = $db;
+$posts->mem  = $mem;
+$posts->lang = $lang;
 						
 if(strlen(@$user['img'])>0)	$pic = $user['img']; else $pic = 'gfx/faces/23.png';
 if(strlen(@$user['fname'])>0 && strlen($user['sname'])>0) $name = $user['fname'].' '.$user['sname']; else $name = $user['zhname'];

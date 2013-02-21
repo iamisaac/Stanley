@@ -324,5 +324,48 @@ class posts
 		$this->fetchPosts();
 		
 	}
+
+    public function tag($string)
+    {
+        $reg = '/#[a-zA-Z0-9]+/';
+
+        if(preg_match_all($reg, $string, $tag))
+        {
+            ;
+            for($i=0;$i<count($tag);$i++)
+            {
+                $val = $tag[$i];
+
+                for($j=0;$j<count($val); $j++)
+                {
+                    $zm = substr($val[$j], 1);
+                    $string = str_replace($val[$j], '<a href="?w=tags&t='.$zm.'"><b>'.$val[$j].'</b></a>', $string);
+                }
+            }
+
+        }
+
+        return $string;
+    }
+
+    public function url($string)
+    {
+        $string = $this->tag($string);
+
+        $reg = "/(http|ftp|https|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/";
+
+        if(preg_match_all($reg, $string, $url))
+        {
+            /*
+             * vimeo, youtube movies recognition
+             */
+
+            $res = parse_url($url);
+
+
+
+        }
+
+    }
 	
 }

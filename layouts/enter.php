@@ -5,7 +5,7 @@
 			<input class="log" type="text" id="email" name="email" />
 			<input class="log" type="password"  id="passwd" name="passwd" /><br><br>
 			
-			<a href="#"><img class="tipped" title="Enter" src="gfx/button.png" id="logButton"  border="0" /></a>
+			<a href="#"><img class="tipped" title="<?php echo $lang->enter->enter; ?>" src="gfx/button.png" id="logButton"  border="0" /></a>
 			
 		</div>
 	</div>

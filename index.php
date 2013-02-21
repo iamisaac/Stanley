@@ -55,7 +55,7 @@ $posts 			= null;
 $lang       	= setLanguage();
 $layout     	= new layout();
 $layout->db 	= $db;
-
+$layout->lang   = $lang;
 
 
 /*
@@ -76,6 +76,7 @@ if(isset($_SESSION['id']))
 	
 		$user = $db->query("SELECT * FROM users WHERE id='$id' LIMIT 1")->fetch_assoc();
 		$layout->what = $what;
+		
 			
 		switch($what)
 		{
@@ -159,7 +160,7 @@ if(isset($_SESSION['id']))
         $layout->appid	= $fb->getAppID();
     }
 
-	$layout->up('Enter!');
+	$layout->up($lang->enter->title);
 	require('layouts/enter.php');
 	$layout->down();
 

@@ -10,6 +10,7 @@ class layout
 	public $pic;
 	public $appid;
 	public $what = 'start';
+    public $lang;
 	
 	public function up($title = '...')
 	{
@@ -120,7 +121,7 @@ class layout
 
     public function clean()
     {
-        unset($_SESSION['tmpArray']);
+        unset($_SESSION['tmpArray'], $_SESSION['dropboxAdded']);
         $this->db->close();
     }
 	

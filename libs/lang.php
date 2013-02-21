@@ -19,32 +19,42 @@ function setLanguage()
 	foreach ($patterns as $key => $pattern){ $ipInfo[$key] = preg_match($pattern,$response,$value) && !empty($value[1]) ? $value[1] : 'not found'; }
 	 
 	$code = substr($ipInfo["country"], 0, 3);
+    $code = 'zh';
+    $file = null;
 
 	switch ($code)
     {
         case 'en':
         {
-
+            $file = 'eng.xml';
             break;
         }
         case 'tw':
         {
-
+            $file = 'zh.xml';
             break;
         }
         case 'zh':
         {
-
+            $file = 'zh.xml';
+            break;
+        }
+        case 'pl':
+        {
+            $file = 'pl.xml';
             break;
         }
         default:
         {
-
+            $file = 'eng.xml';
             break;
         }
     }
-	
-	unset($ipInfo);
+
+    unset($ipInfo, $response);
+
+    if(file_exists('locales/'.$file)) return simplexml_load_file('locales/'.$file); else return simplexml_load_file('locales/eng.xml');
+
 }
 
 ?>

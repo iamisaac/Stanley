@@ -47,6 +47,20 @@ if(strlen($body)<4096 && strlen($body)>3)
 
             $db->query("UPDATE posts SET files=1 WHERE id='$pid'");
         }
+
+        if(isset($_SESSION['dropboxAdded']))
+        {
+            $tmpArray = $_SESSION['dropboxAdded'];
+            unset($_SESSION['dropboxAdded']);
+
+            for($i=0;$i<count($tmpArray);$i++)
+            {
+                $upid = $tmpArray[$i];
+                //requires better algoritm which do make so many mysql requests
+                $db->query("UPDATE DBFiles SET pid='$pid' WHERE id='$upid'");
+            }
+        }
+
 		if(isset($mem))
 		{
 			

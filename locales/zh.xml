@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
 	<enter>
+        <title>輔仁大學神學院</title>
+        <enter>進去</enter>
 		<email>電子郵件</email>
+        <passwd>密碼</passwd>
 	</enter>
 	
 	<main>
-	
+	    <profile>帳號</profile>
+        <exit>登出</exit>
+        <start>開始</start>
+        <add></add>
 	</main>
 	
 	<cat>

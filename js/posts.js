@@ -154,26 +154,24 @@ function deletePost(pid, cat)
 
 }
 
-Dropbox.choose(options);
-
-options = {
-  linkType: "preview",
-  success: function(files) {
-                
-	  alert(files);
-				
-                $.ajax({
-	             	url: './ajax/addfiles.php',
-	             	type: 'POST',
-	             	data: {files: files},
-	             	success: function(res)
-	                {
-	                	
-	                }
-                });
-                
-            },
-  cancel:  function() {
-  
+Dropbox.choose(
+{
+    linkType: "preview",
+    success: function(files) {
+        $.ajax({
+            url: './ajax/addfiles.php',
+            type: 'POST',
+            data: {files: files},
+            success: function(res)
+            {
+                alert(files[0].link);
             }
-};
+        });
+
+    },
+    cancel:  function() {
+
+    }
+
+});
+
