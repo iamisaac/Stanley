@@ -154,8 +154,9 @@ function deletePost(pid, cat)
 
 }
 
-Dropbox.choose(
-{
+Dropbox.choose(options);
+
+options = {
     linkType: "preview",
     success: function(files) {
         $.ajax({
@@ -164,7 +165,15 @@ Dropbox.choose(
             data: {files: files},
             success: function(res)
             {
-                alert(files[0].link);
+                var obj = jQuery.parseJSON(res);
+
+                if(typeof obj == 'object')
+                {
+                    if(obj.stat == 'OK')
+                    {
+
+                    }
+                }
             }
         });
 
@@ -173,5 +182,4 @@ Dropbox.choose(
 
     }
 
-});
-
+};

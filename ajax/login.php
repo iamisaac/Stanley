@@ -24,7 +24,7 @@ if($email && $passwd)
 		
 		$errors['email'] = 1;
 		
-		if($passwd == $tmp['passwd'])
+		if(sha1($passwd) === $tmp['passwd'])
 		{ 
 			
 			/*
